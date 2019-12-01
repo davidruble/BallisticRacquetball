@@ -106,9 +106,9 @@ namespace OculusSampleFramework
 #endif
     }
 
-    void Update()
+        protected override void Update()
         {
-
+            base.Update();
             Debug.DrawRay(transform.position, transform.forward, Color.red, 0.1f);
             
             DistanceGrabbable target;

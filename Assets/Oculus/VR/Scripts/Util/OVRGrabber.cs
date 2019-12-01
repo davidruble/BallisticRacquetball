@@ -122,11 +122,14 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-	void FixedUpdate()
+    // David: I made this protected and virtual so it can be overridden and called from children classes
+	protected virtual void FixedUpdate()
 	{
 		if (operatingWithoutOVRCameraRig)
 			OnUpdatedAnchors();
 	}
+
+    protected virtual void Update() { }
 
     // Hands follow the touch anchors by calling MovePosition each frame to reach the anchor.
     // This is done instead of parenting to achieve workable physics. If you don't require physics on

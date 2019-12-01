@@ -8,40 +8,41 @@ as well as a conversation with my buddy Taylor Sloan.
 
 ## Plan of Attack
 
-#### Phase 1
+#### Phase 1 (Initial Design and Mechanics)
 
 - [ ] Basic room design
 - [ ] Basic UI design
-- [ ] Grenade mechanics
-- [ ] Interactions with *hands*
+- [x] Interactions with *hands*
+- [ ] Interactions with *guns*
+- [ ] Grenade mechanics (includes win/loss conditions)
+- [ ] Sound effects
 
-#### Phase 2
-
-- [ ] Player interactions with *guns*
-- [ ] Interaction between bullets and grenade
-
-#### Phase 3
+#### Phase 2 (Integration of AI)
 
 - [ ] Game type selection menu
 - [ ] Versus 1 AI enemy
+- [ ] 2v2
 
-#### Phase 4
+#### Phase 3 (Powerups)
 
-- [ ] Versus 2 AI enemies
-- [ ] Coop with AI
+- [ ] Interface for earning/activating powerups
+- [ ] Additional gun options
+- [ ] Other powerups (TBD)
+- [ ] Allow AI to earn and use powerups
 
-#### Phase 5
+#### Phase 4 (Networking)
 
-- [ ] Networked play with other players (tasks TBD)
+- [ ] Networked play with one other player
+- [ ] Creation/selection of lobbies
+- [ ] Leaderboard
 
-#### Phase 6
-
-- [ ] Powerups (TBD)
-
-#### Phase 7
+#### Phase 5 (Finishing Touches and Improvements)
 
 - [ ] World visual improvements
 - [ ] UI improvements
+- [ ] Sound improvements
+- [ ] Write own version of OculusSampleFramework scripts (like DistanceGrabber)
+- [ ] Clean up unused/unnecessary asset files
 - [ ] Other finishing touches (TBD)
 
 ## Technologies Utilized
