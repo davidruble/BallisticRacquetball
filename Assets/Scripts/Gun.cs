@@ -12,8 +12,9 @@ public class Gun : DistanceGrabbable
     public Transform barrelLocation;
     public Transform casingExitLocation;
 
-    public float bulletForce = 100.0f;
+    private float bulletForce = 2000.0f;
     public float casingExitForce = 550.0f;
+    public float casingLifetimeSec = 5.0f;
 
     public void FireWeapon(object handThatFired)
     {
@@ -48,12 +49,16 @@ public class Gun : DistanceGrabbable
     // This will be called by the Animator during the shoot animation
     void Shoot()
     {
-        // Instantiate the bullet and give it a little push
-        GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
+        // Instantiate the bullet and give it a little push. We instantiate it a little bit forward
+        // to avoid colliding with the gun itself.
+        Vector3 bulletPos = barrelLocation.position + barrelLocation.forward * 0.1f;
+        GameObject bullet = Instantiate(bulletPrefab, bulletPos, barrelLocation.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * bulletForce);
 
-        // Create the muzzle flash effect
-        Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
+        // Create the muzzle flash effect and destroy it once it's effect is done
+        GameObject flash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
+        ParticleSystem ps = flash.GetComponent<ParticleSystem>();
+        Destroy(flash, ps.main.duration);
     }
 
     // This will be called by the Animator during the shoot animation
@@ -63,5 +68,8 @@ public class Gun : DistanceGrabbable
         GameObject casing = Instantiate(casingPrefab, casingExitLocation.position, casingExitLocation.rotation);
         casing.GetComponent<Rigidbody>().AddExplosionForce(casingExitForce, (casingExitLocation.position - casingExitLocation.right * 0.3f - casingExitLocation.up * 0.6f), 2f);
         casing.GetComponent<Rigidbody>().AddTorque(new Vector3(0, Random.Range(100f, 500f), Random.Range(10f, 1000f)), ForceMode.Impulse);
+
+        // Clean up the casings after some time
+        Destroy(casing, casingLifetimeSec);
     }
 }
