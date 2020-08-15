@@ -129,8 +129,6 @@ public class OVRGrabber : MonoBehaviour
 			OnUpdatedAnchors();
 	}
 
-    protected virtual void Update() { }
-
     // Hands follow the touch anchors by calling MovePosition each frame to reach the anchor.
     // This is done instead of parenting to achieve workable physics. If you don't require physics on
     // your hands or held objects, you may wish to switch to parenting.
