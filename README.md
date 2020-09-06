@@ -10,11 +10,11 @@ as well as a conversation with my buddy Taylor Sloan.
 
 #### Phase 1 (Initial Design and Mechanics)
 
-- [ ] Basic room design
+- [x] Basic room design
 - [ ] Basic UI design
 - [x] Interactions with *hands*
 - [x] Interactions with *guns*
-- [ ] Grenade mechanics (includes win/loss conditions)
+- [x] Grenade mechanics (includes win/loss conditions)
 - [ ] Sound effects
 
 #### Phase 2 (Networking)
@@ -47,6 +47,6 @@ as well as a conversation with my buddy Taylor Sloan.
 
 ## Technologies Utilized
 
-- Unity 2018.4.13
+- Unity 2019.4.8
 - Oculus Rift
 
