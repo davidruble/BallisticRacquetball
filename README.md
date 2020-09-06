@@ -13,28 +13,28 @@ as well as a conversation with my buddy Taylor Sloan.
 - [ ] Basic room design
 - [ ] Basic UI design
 - [x] Interactions with *hands*
-- [ ] Interactions with *guns*
+- [x] Interactions with *guns*
 - [ ] Grenade mechanics (includes win/loss conditions)
 - [ ] Sound effects
 
-#### Phase 2 (Integration of AI)
+#### Phase 2 (Networking)
+
+- [ ] Networked play with one other player
+- [ ] Creation/selection of lobbies
+- [ ] Leaderboard
+
+#### Phase 3 (Integration of AI)
 
 - [ ] Game type selection menu
 - [ ] Versus 1 AI enemy
 - [ ] 2v2
 
-#### Phase 3 (Powerups)
+#### Phase 4 (Powerups)
 
 - [ ] Interface for earning/activating powerups
 - [ ] Additional gun options
 - [ ] Other powerups (TBD)
 - [ ] Allow AI to earn and use powerups
-
-#### Phase 4 (Networking)
-
-- [ ] Networked play with one other player
-- [ ] Creation/selection of lobbies
-- [ ] Leaderboard
 
 #### Phase 5 (Finishing Touches and Improvements)
 
