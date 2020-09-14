@@ -6,13 +6,17 @@ using OculusSampleFramework;
 [RequireComponent(typeof(Animator))]
 public class Gun : DistanceGrabbable
 {
-    public GameObject bulletPrefab;
     public GameObject casingPrefab;
     public GameObject muzzleFlashPrefab;
+    public GameObject impactPrefab;
     public Transform barrelLocation;
     public Transform casingExitLocation;
-
-    private float bulletForce = 2000.0f;
+    
+    // Aiming parameters
+    public float aimTolerance = 0.5f;
+    public float maxShootDistance = 25.0f;
+    
+    // Bullet casing parameters
     public float casingExitForce = 550.0f;
     public float casingLifetimeSec = 5.0f;
 
@@ -49,16 +53,21 @@ public class Gun : DistanceGrabbable
     // This will be called by the Animator during the shoot animation
     void Shoot()
     {
-        // Instantiate the bullet and give it a little push. We instantiate it a little bit forward
-        // to avoid colliding with the gun itself.
-        Vector3 bulletPos = barrelLocation.position + barrelLocation.forward * 0.1f;
-        GameObject bullet = Instantiate(bulletPrefab, bulletPos, barrelLocation.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * bulletForce);
+        // Perform a hit scan to see if we shot anything. If anything was hit, perform "hit" actions.
+        RaycastHit hit;
+        if (Physics.SphereCast(barrelLocation.position, aimTolerance, barrelLocation.forward, out hit, maxShootDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            // Instantiate the impact prefab at the point of contact
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            InstantiateParticleEffect(impactPrefab, hit.point, rotation);
+            
+            // If the object has any additional actions to perform when shot, trigger those.
+            Shootable shootableObj = hit.transform.GetComponent<Shootable>();
+            shootableObj?.OnShot(hit.point, barrelLocation.forward);
+        }
 
-        // Create the muzzle flash effect and destroy it once it's effect is done
-        GameObject flash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
-        ParticleSystem ps = flash.GetComponent<ParticleSystem>();
-        Destroy(flash, ps.main.duration);
+        // Create the muzzle flash effect
+        InstantiateParticleEffect(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
     }
 
     // This will be called by the Animator during the shoot animation
@@ -72,4 +81,21 @@ public class Gun : DistanceGrabbable
         // Clean up the casings after some time
         Destroy(casing, casingLifetimeSec);
     }
+
+    // Helper function to create and then destroy a particle system (bullet impact, muzzle flash, etc)
+    void InstantiateParticleEffect(GameObject prefab, Vector3 pos, Quaternion rot, float maxDuration = 5.0f)
+    {
+        if (prefab)
+        {
+            GameObject instance = Instantiate(prefab, pos, rot);
+            ParticleSystem ps = instance.GetComponent<ParticleSystem>();
+            if (ps) Destroy(instance, ps.main.duration);
+            else Destroy(instance, maxDuration);
+        }
+        else
+        {
+            Debug.LogError("Attempting to instantiate explosion without a set prefab");
+        }
+    }
+
 }

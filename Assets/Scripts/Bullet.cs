@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// DEPRECATED IN FAVOR OF HITSCAN
+// TODO: REMOVE
 public class Bullet : MonoBehaviour
 {
     public GameObject explosionPrefab;

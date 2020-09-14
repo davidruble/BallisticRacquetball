@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshPro))]
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviour, Shootable
 {
     private TextMeshPro m_timerText;
     private int m_secondsRemaining;
@@ -55,13 +55,9 @@ public class Timer : MonoBehaviour
         yield return null;
     }
 
-    void OnCollisionEnter(Collision other)
+    // Implements Shootable OnShot function
+    public void OnShot(Vector3 position, Vector3 direction)
     {
-        Debug.Log("Timer collision detected");
-        if (!other.gameObject.CompareTag("Shootable"))
-        {
-            Debug.Log("Timer collision");
-            timerCollision?.Invoke(other.gameObject);
-        }
+        timerCollision?.Invoke(position);
     }
 }

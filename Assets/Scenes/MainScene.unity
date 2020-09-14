@@ -850,7 +850,7 @@ PrefabInstance:
     - target: {fileID: 6919817177039038708, guid: 496fa14150c15af4a931b0eb5245eb99,
         type: 3}
       propertyPath: grenadeCountdownSeconds
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 496fa14150c15af4a931b0eb5245eb99, type: 3}
